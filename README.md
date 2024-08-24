@@ -16,18 +16,32 @@
 This includes `r` which is currently how you reference a verse
 
 ```typ
-import "bible.typ": r
+import "bible.typ": bible_footnote, bible_quote
 ```
+
+## `bible_footnote`
 
 ### Calling
 
 ```typ
-I am blessed because my sins are forgiven! #r("Romans 4:7")
+I am blessed because my sins are forgiven! #bible_footnote("Romans 4:7")
 ```
 
 ### Result
 
-![](./imgs/footnote.png)
+![](./imgs/bible_footnote.png)
+
+## `bible_quote`
+
+### Calling
+
+```typ
+#bible_quote("Romans 4:7")
+```
+
+### Result
+
+![](./imgs/bible_quote.png)
 
 ### Extra Information
 
@@ -40,7 +54,7 @@ However, you can just rename them as follows:
 ```
 This is a made up example, but you get the point.
 
-## Building
+## Building WASM
 
 To build:
 
