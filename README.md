@@ -1,21 +1,44 @@
-# Typst WASM Template
+# Typst Bible
 
 ## Explanation
 
-- I wanted to create a template for myself to start other plugins from.
-- The [wasm_macro](https://github.com/astrale-sharp/wasm-minimal-protocol) code comes from https://github.com/astrale-sharp/wasm-minimal-protocol.
-- I adapted it into a structure I think is easier.
+- Reference Bible verses
+- ESV is currently only translation
+- Many changes and improvements are planned
+- Currently just puts the verse content in a footnote
 
-## Running
+## Usage
+
+`bible.typ` is meant to provide an API for interacting with `bible.wasm`
+
+### Import `bible.typ`
+
+This includes `r` which is currently how you reference a verse
+
+```typ
+import "bible.typ": r
+```
+
+### Calling
+
+```typ
+I am blessed because my sins are forgiven! #r("Romans 4:7")
+```
+
+### Result
+
+![](./imgs/footnote.png)
+
+## Building
+
+To build:
 
 ```bash
 wasm-pack build --target web
 ```
 
-## Tips
+I use a script that deletes and re-links the file so that Typst knows to re-check the contents:
 
-If you had data in a JSON file and you want it compiled into the .wasm file do this:
-
-```rust
-const DATA_JSON: &str = include_str!("data.json");
+```bash
+./run.sh
 ```
