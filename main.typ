@@ -1,6 +1,29 @@
-#import "bible.typ": r
+#import "bible.typ": bible_footnote, bible_quote
 
-= Here is a paper on a biblical topic
+#for _ in range(26) {
+	[\ ]
+}
 
-I can insert verses that I reference.
-I am blessed because my sins are forgiven! #r("Romans 4:7")
+== `bible_quote(<verse>, *)`
+
+=== Usage:
+
+```typ
+#bible_quote("John 3:16")
+```
+
+=== Displays:
+
+#bible_quote("John 3:16")
+
+== `bible_footnote(<verse>, *)`
+
+=== Usage:
+
+```typ
+We should not love the world.#bible_footnote("1 John 2:15")
+```
+
+=== Displays:
+
+We should not love the world.#bible_footnote("1 John 2:15")

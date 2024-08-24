@@ -29,6 +29,17 @@ I am blessed because my sins are forgiven! #r("Romans 4:7")
 
 ![](./imgs/footnote.png)
 
+### Extra Information
+
+I will try and provide clear naming conventions, and they might be a bit verbose.
+However, you can just rename them as follows:
+```typ
+#let v = set_verse_content_in_footnote
+// ...
+#v("1 John 3:2")
+```
+This is a made up example, but you get the point.
+
 ## Building
 
 To build:
