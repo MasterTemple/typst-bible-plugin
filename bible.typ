@@ -82,6 +82,31 @@
 	]
 }
 
+#let hstack_quote(content, attribution) = {
+	let this_quote = block(width: 100%,
+		pad(x: 0.5em, y: 0.5em, right: 0.5em,
+			quote(block: true, attribution: [#attribution])[
+				#par(justify: true, content)
+			])
+		)
+	pad(x: 2em, [
+		#layout(size => [
+			#let (height,) = measure(
+				block(width: size.width, this_quote),
+			)
+			#let height = height
+		  #stack(dir: ltr,
+				box(
+					width: 2pt,
+					height: height,
+					fill: black,
+				),
+				[#this_quote]
+			)
+		])
+	])
+}
+
 #let bible_footnote(..refs) = {
 	[#footnote[
 		#for ref in refs.pos() {
@@ -92,13 +117,9 @@
 }
 
 #let bible_quote(..refs) = {
-	// let (book, chapter, start_verse, end_verse) = parse_ref(ref)
 	for ref in refs.pos() {
 		[
-			// #quote(attribution: [#ref], block: true)[
-			// 	#parse_verse_and_get_content(ref)
-			// ]
-			#block_quote(parse_verse_and_get_content(ref), [#ref #translation] )
+			#hstack_quote(parse_verse_and_get_content(ref), [#ref #translation] )
 		]
 	}
 }
