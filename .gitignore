@@ -2,3 +2,5 @@ pkg
 target
 wasm_macro/target
 *.wasm
+*.pdf
+test.typ

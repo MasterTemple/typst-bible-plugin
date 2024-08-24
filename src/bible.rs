@@ -1,6 +1,6 @@
 use serde_json::{Map, Value};
 
-const NT_TREE_JSON: &str = include_str!("nt_tree.json");
+const NT_TREE_JSON: &str = include_str!("bible.json");
 
 pub fn get_content(book: &str, chapter: i32, verse: i32) -> Result<String, String> {
     let book = book.to_string();

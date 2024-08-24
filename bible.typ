@@ -1,5 +1,4 @@
 #let bible = plugin("bible.wasm")
-#let greek = json("greek.json")
 
 #let esv(book, chapter, verse) = {
 	let translation = "ESV";
