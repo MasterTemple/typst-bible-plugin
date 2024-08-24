@@ -93,7 +93,7 @@
 			// #quote(attribution: [#ref], block: true)[
 			// 	#parse_verse_and_get_content(ref)
 			// ]
-			#block_quote(parse_verse_and_get_content(ref), ref)
+			#block_quote(parse_verse_and_get_content(ref), [#ref #translation] )
 		]
 	}
 }
