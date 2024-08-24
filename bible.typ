@@ -54,14 +54,19 @@
 // }
 
 #let block_quote(content, attribution) = {
-	let this_quote = pad(y: 0.5em, quote(block: true, attribution: [#attribution])[#content])
+	let this_quote = block(width: 100%,
+		pad(x: 0.5em, y: 0.5em, right: 4em,
+			quote(block: true, attribution: [#attribution])[
+				#par(justify: true, content)
+			])
+		)
 	[
 		#layout(size => [
 			#let (height,) = measure(
 				block(width: size.width, this_quote),
 			)
 			#let height = height
-			#let indent = 0em
+			#let indent = 2em
 			#h(indent)
 			#box(
 				width: 2pt,
