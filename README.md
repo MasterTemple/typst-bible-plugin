@@ -53,3 +53,7 @@ I use a script that deletes and re-links the file so that Typst knows to re-chec
 ```bash
 ./run.sh
 ```
+
+## Screenshots
+
+![](./imgs/screenshot.png)
