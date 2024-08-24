@@ -53,6 +53,30 @@
 // 	set_verse_footnote(book, chapter, start_verse, end_verse)
 // }
 
+#let block_quote(content, attribution) = {
+	let this_quote = pad(y: 0.5em, quote(block: true, attribution: [#attribution])[#content])
+	[
+		#layout(size => [
+			#let (height,) = measure(
+				block(width: size.width, this_quote),
+			)
+			#let height = height
+			#let indent = 0em
+			#h(indent)
+			#box(
+				width: 2pt,
+				height: height,
+				fill: black,
+			)
+			#place(
+				dy: -height,
+				dx: indent,
+			[#this_quote]
+			)
+		])
+	]
+}
+
 #let bible_footnote(..refs) = {
 	[#footnote[
 		#for ref in refs.pos() {
@@ -66,9 +90,10 @@
 	// let (book, chapter, start_verse, end_verse) = parse_ref(ref)
 	for ref in refs.pos() {
 		[
-			#quote(attribution: [#ref], block: true)[
-				#parse_verse_and_get_content(ref)
-			]
+			// #quote(attribution: [#ref], block: true)[
+			// 	#parse_verse_and_get_content(ref)
+			// ]
+			#block_quote(parse_verse_and_get_content(ref), ref)
 		]
 	}
 }
