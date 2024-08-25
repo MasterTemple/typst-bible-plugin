@@ -107,6 +107,46 @@
 	])
 }
 
+#let merge_every_other(arr1, arr2) = {
+	let arr = ();
+	let toggle = false;
+	let i1 = 0;
+	let i2 = 0;
+	while i1 < arr1.len() or i2 < arr2.len() {
+		toggle = not toggle;
+		if toggle {
+	    if i1 == arr1.len() {
+				continue
+			}
+			arr.push(arr1.at(i1));
+			i1 += 1;
+		} else {
+	    if i2 == arr2.len() {
+				continue
+			}
+			arr.push(arr2.at(i2).text);
+			i2 += 1;
+		}
+	}
+	arr
+}
+
+#let fmt_match(content, pattern, formatter) = {
+  let parts = content.split(regex(pattern))
+	let matches = content.matches(regex(pattern))
+	let alternating_parts = merge_every_other(parts, matches);
+	let result = ()
+	for (i, part) in alternating_parts.enumerate() {
+		if calc.rem(i, 2) == 0 {
+			result.push(part)
+		}
+		else {
+			result.push([#formatter(part)])
+		}
+	}
+  result.join()
+}
+
 #let bible_footnote(..refs) = {
 	[#footnote[
 		#for ref in refs.pos() {
@@ -118,8 +158,41 @@
 
 #let bible_quote(..refs) = {
 	for ref in refs.pos() {
+		let content = parse_verse_and_get_content(ref)
 		[
-			#hstack_quote(parse_verse_and_get_content(ref), [#ref #translation] )
+			#hstack_quote(content, [#ref #translation] )
 		]
 	}
+}
+// ref = verse reference
+// hl = highlight match pattern
+// ul = underline match pattern
+// it = italics match pattern
+// b = bold match pattern
+#let bible_quote_fmt(ref, hl: "", b: "", ul: "", it: "") = {
+		let content = parse_verse_and_get_content(ref)
+		let new_fields = ()
+		for child in content.fields().children {
+			if child.has("text") {
+					if hl.len() > 0 {
+						child = [#fmt_match(child.text, hl, highlight.with(fill: yellow))]
+						[#child\ ]
+						[#child.text\ ]
+					}
+					if b.len() > 0 {
+						child = [#fmt_match(child.text, b, text.with(weight: "bold"))]
+					}
+					if ul.len() > 0 {
+						child = [#fmt_match(child.text, ul, underline)]
+					}
+					if it.len() > 0 {
+						child = [#fmt_match(child.text, it, text.with(style: "italic"))]
+					}
+			}
+			new_fields.push(child)
+		}
+		let content = new_fields.join("")
+		[
+			#hstack_quote(content, [#ref #translation] )
+		]
 }
