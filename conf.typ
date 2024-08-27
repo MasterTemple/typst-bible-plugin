@@ -20,6 +20,14 @@
 		#line(length: 90%, stroke: 0.8pt)
 	]
 
+	show heading.where(level: 3): it => [
+		#pad(
+			bottom: -0.5em,
+			it
+		)
+		#line(length: 90%, stroke: (thickness: 0.5pt, paint: gray))
+	]
+
  let bible_regex_str = "((?:\d )?\w+(?: of Solomon)?) (\d+).(\d+(?:-\d+)?)?"
 	// syntax for easily adding Bible footnotes
 	// God loves the world ^ John 3.15

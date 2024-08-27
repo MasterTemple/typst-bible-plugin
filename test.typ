@@ -9,8 +9,6 @@
 
 = Theology of Money
 
-an apostle ^ 1 Peter 1.1
-
 == Work for it
 
 #bible_quote("Ephesians 4:28")

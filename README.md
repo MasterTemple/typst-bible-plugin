@@ -16,7 +16,7 @@
 This includes `r` which is currently how you reference a verse
 
 ```typ
-import "bible.typ": bible_footnote, bible_quote
+import "bible.typ": bible_footnote, bible_quote, bible_quote_fmt
 ```
 
 ## `bible_footnote`
@@ -25,6 +25,8 @@ import "bible.typ": bible_footnote, bible_quote
 
 ```typ
 I am blessed because my sins are forgiven! #bible_footnote("Romans 4:7")
+// or
+I am blessed because my sins are forgiven! ^ Romans 4:7
 ```
 
 ### Result
@@ -37,11 +39,40 @@ I am blessed because my sins are forgiven! #bible_footnote("Romans 4:7")
 
 ```typ
 #bible_quote("Romans 4:7")
+// or
+> Romans 4:7
 ```
 
 ### Result
 
 ![](./imgs/bible_quote.png)
+
+## `bible_quote_fmt`
+
+### Calling
+
+#### Basic
+
+This is just like using `#bible_quote` with no additional formatting applied
+
+```typ
+#bible_quote_fmt("Ephesians 4:28")
+```
+
+#### Bold
+
+```typ
+#bible_quote_fmt("Ephesians 4:28", b: "")
+```
+
+#### `hl`   = highlight match pattern
+#### `ul`   = underline match pattern
+#### `it`   = italics match pattern
+#### `b`    = bold match pattern
+#### `c`    = custom match pattern to apply `fmt` filter
+#### `fmt`  = custom formatting pattern
+#### `omit` = omit content by replacing with elipse ...
+
 
 ### Extra Information
 

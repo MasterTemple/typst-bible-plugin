@@ -5,3 +5,4 @@ wasm_macro/target
 *.pdf
 !main.pdf
 !bible.wasm
+!README.pdf
