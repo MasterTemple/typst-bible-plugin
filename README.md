@@ -1,11 +1,13 @@
 # Typst Bible
 
+**I wrote a more complete README in Typst.
+View the documentation [here](./README.pdf).**
+
 ## Explanation
 
-- Reference Bible verses
-- ESV is currently only translation
-- Many changes and improvements are planned
-- Currently just puts the verse content in a footnote
+- To easily reference Bible verses for personal, ministerial, or academic papers
+- ESV is currently only supported translation
+- If you have any great ideas, please open a [GitHub Issue](https://github.com/MasterTemple/typst-bible-plugin/issues)
 
 ## Usage
 
