@@ -250,6 +250,7 @@
 		// `c`   = custom match pattern to apply `fmt` filter
 		// `fmt` = custom formatting pattern
 		let content = apply_fmt_to_content(content, c, fmt)
+		// `omit` = omit content by replacing with elipse ...
 		let content = apply_function_to_content(content, omit, (text) => text.replace(regex(omit), "..."))
 		[
 			#hstack_quote(content, [#ref #translation] )

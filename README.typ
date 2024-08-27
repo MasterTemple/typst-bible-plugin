@@ -63,6 +63,8 @@ I am blessed because my sins are forgiven! #bible_footnote("Romans 4:7")
 
 == ```typ #bible_quote_fmt() ```
 
+Note: Regular Expressions are supported and will be discussed in #link(<regex-support>, "RegEx Support").
+
 ==== Basic
 
 This is just like using ```typ #bible_quote()``` with no additional formatting applied
@@ -122,9 +124,9 @@ This is just like using ```typ #bible_quote()``` with no additional formatting a
 ```
 #bible_quote_fmt("Ephesians 4:28", omit: "doing honest work with his own hands")
 
-=== Regex Support
+=== RegEx Support <regex-support>
 
-The parameters for to match are Regular Expressions, you can learn more about them at #link("https://typst.app/docs/reference/foundations/regex/").
+The parameters for matching are Regular Expressions, you can learn more about them at #link("https://typst.app/docs/reference/foundations/regex/").
 
 ==== Removing beginning of quote
 
@@ -151,7 +153,7 @@ Or you could even say:
 ```typ
 #bible_quote_fmt("Ephesians 4:28", omit: "^.*?rather")
 ```
-To remove everything (#string(".*?")) from the start of the verse (#string("^")) to the first #string("rather")
+To remove everything (#string(".*?")) from the start of the verse (#string("^")) to the first #string("rather") (which again equates to #string("Let the thief no longer steal, but"))
 #bible_quote_fmt("Ephesians 4:28", omit: "^.*?rather")
 
 Explanation:
@@ -160,7 +162,9 @@ Explanation:
 - #string(".*?") is the same way, but it matches as many as necessary
 - In other words, #string(".*rather") will match everything up to #underline[the last] #string("rather"), but #string(".*?rather") will match everything up until #underline[the first] rather
 
-It is the same thing for removing the end, but you use the #string("$") character:
+==== Removing end of quote
+
+It is the same thing to remove the end, but you use the #string("$") character:
 ```typ
 #bible_quote_fmt("Ephesians 4:28", omit: ", so.*$")
 ```
@@ -168,6 +172,18 @@ It is the same thing for removing the end, but you use the #string("$") characte
 
 This removes everything (#string(".*")) from #string(", so") to the end of the line #string("$") (or #string(", so that he may have something to share with anyone in need.")).
 
+==== Removing beginning and end of quote
+
+```typ
+#bible_quote_fmt("Ephesians 4:28", omit: "^.*?rather|, so.*$")
+```
+#bible_quote_fmt("Ephesians 4:28", omit: "^.*?rather|, so.*$")
+
+This does both
+
+- #string("^.*?rather") starts at the beginning (#string("^")) and removes everything up to (#string(".*?")) the first #string("rather").
+- #string(", so.*$") removes everything (#string(".*")) from #string(", so") to the end of the line (#string("$"))
+- #string("|") joins the 2 patterns together with a logical `OR` operation, meaning it will do the first pattern or second pattern (and if it can do both, it does both)
 
 == Additional Information
 
