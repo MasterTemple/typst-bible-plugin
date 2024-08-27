@@ -169,15 +169,18 @@
 // ul = underline match pattern
 // it = italics match pattern
 // b = bold match pattern
-#let bible_quote_fmt(ref, hl: "", b: "", ul: "", it: "") = {
+#let bible_quote_fmt1(ref, hl: "", b: "", ul: "", it: "") = {
 		let content = parse_verse_and_get_content(ref)
 		let new_fields = ()
 		for child in content.fields().children {
 			if child.has("text") {
+					// [#type(child)\ ]
 					if hl.len() > 0 {
 						child = [#fmt_match(child.text, hl, highlight.with(fill: yellow))]
-						[#child\ ]
-						[#child.text\ ]
+						// [#child\ ]
+						// [#type(child)\ ]
+						// [#child.has("text")\ ]
+						// [#child.text\ ]
 					}
 					if b.len() > 0 {
 						child = [#fmt_match(child.text, b, text.with(weight: "bold"))]
@@ -192,6 +195,62 @@
 			new_fields.push(child)
 		}
 		let content = new_fields.join("")
+		[
+			#hstack_quote(content, [#ref #translation] )
+		]
+}
+
+#let apply_function_to_content(content, pattern, fn) = {
+		let new_fields = ()
+		for child in content.fields().children {
+			if child.has("text") {
+					if pattern.len() > 0 {
+						child = [#fmt_match(child.text, pattern, fn)]
+					}
+			}
+			new_fields.push(child)
+		}
+		return new_fields.join("")
+}
+
+
+#let apply_fmt_to_content(content, pattern, formatter) = {
+		let new_fields = ()
+		for child in content.fields().children {
+			if child.has("text") {
+					if pattern.len() > 0 {
+						child = [#fmt_match(child.text, pattern, formatter)]
+					}
+			}
+			new_fields.push(child)
+		}
+		return new_fields.join("")
+}
+
+// `ref`  = verse reference
+// `hl`   = highlight match pattern
+// `ul`   = underline match pattern
+// `it`   = italics match pattern
+// `b`    = bold match pattern
+// `c`    = custom match pattern to apply `fmt` filter
+// `fmt`  = custom formatting pattern
+// `omit` = omit content by replacing with elipse ...
+#let bible_quote_fmt(ref,
+	hl: "", b: "", ul: "", it: "", c: "", fmt: text.with(), omit: ""
+) = {
+		let content = parse_verse_and_get_content(ref)
+		// `hl`  = highlight match pattern
+		let content = apply_fmt_to_content(content, hl, highlight.with(fill: yellow))
+		// `b`   = bold match pattern
+		let content = apply_fmt_to_content(content, b, text.with(weight: "bold"))
+		// `ul`  = underline match pattern
+		let content = apply_fmt_to_content(content, ul, underline)
+		// `it`  = italics match pattern
+		let content = apply_fmt_to_content(content, it, text.with(style: "italic"))
+		// `c`   = custom match pattern to apply `fmt` filter
+		// `fmt` = custom formatting pattern
+		let content = apply_fmt_to_content(content, c, fmt)
+		let content = apply_function_to_content(content, omit, (text) => text.replace(regex(omit), "..."))
 		[
 			#hstack_quote(content, [#ref #translation] )
 		]

@@ -9,6 +9,8 @@
 
 = Theology of Money
 
+an apostle ^ 1 Peter 1.1
+
 == Work for it
 
 #bible_quote("Ephesians 4:28")
@@ -26,16 +28,51 @@ we are #ul[to acquire possessions],
 to do so #ul[in a lawful manner],
 so that we can #ul[share with those who are in need].
 
+
+#image("./test.excalidraw.svg")
+
 == Giving
 
 // Usage example:
 // #bible_quote_fmt(bible_quote("Ephesians 4:28"), "Let the")
 
 // #bible_quote("Ephesians 4:28")
-#bible_quote_fmt("Ephesians 4:28", hl: "thief", b: "so", ul: "anyone", it: "in need")
-#bible_quote_fmt("Ephesians 4:28")
-#bible_quote_fmt("Ephesians 4:28")
-#bible_quote_fmt("Ephesians 4:28")
+// #bible_quote_fmt("Ephesians 4:28", hl: "thief", b: "so", ul: "anyone", it: "in need")
+// #bible_quote_fmt("Ephesians 4:28", hl: "thief", b: "no", ul: "steal", c: "rather let", fmt: highlight.with(fill: red))
+// #bible_quote_fmt("Ephesians 4:28", hl: "thief", b: "no", ul: "steal", c: "rather let ", fmt: text.with(size: 0em, ))
+#bible_quote_fmt("Ephesians 4:28", omit: "^.+?with")
+// #bible_quote_fmt("Ephesians 4:28")
+// #bible_quote_fmt("Ephesians 4:28")
+// #bible_quote_fmt("Ephesians 4:28")
+
+
+// #let bible_footnote_regex = regex("\^ ?(\w+) (\d+).(\d+-?\d+)?")
+// #show bible_footnote_regex: it => {
+//   let (book, chapter, verse) = it.text.match(bible_footnote_regex).captures
+// 	[#h(1pt) #bible_footnote(book + " " + chapter + ":" + verse)]
+// }
+
+// #let bible_quote_regex = regex("> ?(\w+) (\d+).(\d+-?\d+)?")
+// #show bible_quote_regex: it => {
+//   let (book, chapter, verse) = it.text.match(bible_quote_regex).captures
+// 	[#bible_quote(book + " " + chapter + ":" + verse)]
+// }
+
+God loves the world ^ John 3.15
+
+God loves the world ^ John 3.16-17
+
+> John 3.1-3
+
+#bible_quote("Song of Solomon 1:1")
+
+#show regex("((\d+).(\d+))"): (m) => [
+	#m #m
+]
+
+> Song of Solomon 1:1-2
+
+> Song of Solomon 1.1-2
 
 == Hospitality
 
@@ -51,8 +88,3 @@ so that we can #ul[share with those who are in need].
 // #bible_quote("Psalm 24:1")
 // #bible_quote("Proverbs 3:9-10")
 // #bible_quote("Malachi 3:10")
-
-#pagebreak()
-
-
-#bible_quote("Malachi 3:10")
